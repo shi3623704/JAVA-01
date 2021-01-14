@@ -1,5 +1,3 @@
-package com.suanfa.Test;
-
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -8,7 +6,7 @@ import java.lang.reflect.Method;
 import java.util.Objects;
 
 /**
- * @Author 石天成
+ * @Author stc
  * @Date 2021/1/6
  * @Time 23:05
  * @Despatch
@@ -19,7 +17,7 @@ public class HelloClassLoader extends ClassLoader {
         try {
             Class<?> helloClass = new HelloClassLoader().findClass("Hello");
             if (Objects.isNull(helloClass)){
-                System.out.println("-----------类加载失败----------");
+                System.out.println("-----------load class failed ----------");
                 return;
             }
             Object hello = helloClass.newInstance();
@@ -32,7 +30,7 @@ public class HelloClassLoader extends ClassLoader {
 
     @Override
     protected Class<?> findClass(String name) throws ClassNotFoundException {
-        // 创建并读取文件
+       
         File file = new File("D://ideawork//Hello//Hello.xlass");
         long length = file.length();
         if (0 >= length) {
@@ -42,10 +40,10 @@ public class HelloClassLoader extends ClassLoader {
         try (FileInputStream fileInputStream = new FileInputStream(file)) {
             int read = fileInputStream.read(byData);
             if (0>=read){
-                System.out.println("------------文件读取失败----------");
+                System.out.println("------------read file failed----------");
                 return null;
             }
-            // 操作字节码
+            
             for (int i = 0; i < byData.length; i++) {
                 byData[i] = (byte) (255 - byData[i]);
             }
