@@ -31,7 +31,7 @@ public class HelloClassLoader extends ClassLoader {
     @Override
     protected Class<?> findClass(String name) throws ClassNotFoundException {
        
-        File file = new File("D://ideawork//Hello//Hello.xlass");
+        File file = new File(System.getProperty("user.dir")+"/Hello.xlass");
         long length = file.length();
         if (0 >= length) {
             return null;
